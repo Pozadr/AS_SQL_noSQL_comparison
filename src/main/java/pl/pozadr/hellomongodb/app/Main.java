@@ -1,26 +1,84 @@
 package pl.pozadr.hellomongodb.app;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-import pl.pozadr.hellomongodb.model.Toy;
-import pl.pozadr.hellomongodb.model.ToyType;
-import pl.pozadr.hellomongodb.repository.ToyRepo;
+import pl.pozadr.hellomongodb.model.UserMongoDb;
+import pl.pozadr.hellomongodb.model.UserSqlDb;
+import pl.pozadr.hellomongodb.repository.UserMongoDbRepo;
 
+
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
-import java.util.Optional;
+
 
 @Component
 public class Main {
-    private final ToyRepo toyRepo;
+    private final UserMongoDbRepo mongoDbRepo;
 
-    @Autowired
-    public Main(ToyRepo toyRepo) {
-        this.toyRepo = toyRepo;
+    public Main(UserMongoDbRepo mongoDbRepo) {
+        this.mongoDbRepo = mongoDbRepo;
     }
 
     @EventListener(ApplicationReadyEvent.class)
+    public void init(){
+        mongoDbRepo.deleteAll();
+        initMongoDB();
+    }
+
+
+    private void initMongoDB() {
+        try {
+            // create a reader
+            Reader reader = Files.newBufferedReader(Paths.get("./data/MOCK_DATA.csv"));
+
+            // create csv bean reader
+            CsvToBean<UserMongoDb> csvToBean = new CsvToBeanBuilder<UserMongoDb>(reader)
+                    .withType(UserMongoDb.class)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+
+            // iterate through users
+            List<UserMongoDb> users = csvToBean.parse();
+            users.forEach(mongoDbRepo::save);
+
+            // close the reader
+            reader.close();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void initMySqlDB() {
+        try {
+            // create a reader
+            Reader reader = Files.newBufferedReader(Paths.get("./data/MOCK_DATA.csv"));
+
+            // create csv bean reader
+            CsvToBean<UserSqlDb> csvToBean = new CsvToBeanBuilder<UserSqlDb>(reader)
+                    .withType(UserSqlDb.class)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+
+            // iterate through users
+            List<UserSqlDb> users = csvToBean.parse();
+            //users.forEach(mongoDbRepo::save);
+
+            // close the reader
+            reader.close();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /*
     public void init() {
         toyRepo.deleteAll();
         Toy teddyBear = new Toy("Teddy", ToyType.TEDDY_BEAR);
@@ -51,7 +109,7 @@ public class Main {
         System.out.println("DELETE: doll");
         toyRepo.delete(doll);
         toyRepo.findAll().forEach(System.out::println);
-
-
     }
+     */
+
 }
