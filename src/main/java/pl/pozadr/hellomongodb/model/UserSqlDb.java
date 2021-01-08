@@ -2,24 +2,32 @@ package pl.pozadr.hellomongodb.model;
 
 
 import com.opencsv.bean.CsvBindByName;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "usersDbComp")
 public class UserSqlDb {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @CsvBindByName(column = "first_name")
     private String firstName;
+
     @CsvBindByName(column = "last_name")
     private String lastName;
+
     @CsvBindByName
     private String email;
+
     @CsvBindByName
     private String gender;
-    @CsvBindByName(column = "ip_adress")
+
+    @CsvBindByName(column = "ip_address")
     private String ipAddress;
+
 
     public UserSqlDb() {
     }
@@ -32,11 +40,11 @@ public class UserSqlDb {
         this.ipAddress = ipAddress;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -10,15 +10,20 @@ public class UserMongoDb {
 
     @Id
     private String id;
+
     @CsvBindByName(column = "first_name")
     private String firstName;
+
     @CsvBindByName(column = "last_name")
     private String lastName;
+
     @CsvBindByName
     private String email;
+
     @CsvBindByName
     private String gender;
-    @CsvBindByName(column = "ip_adress")
+
+    @CsvBindByName(column = "ip_address")
     private String ipAddress;
 
     public UserMongoDb() {
