@@ -41,4 +41,13 @@ public class Toy {
     public void setType(ToyType type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "Toy{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                '}';
+    }
 }
