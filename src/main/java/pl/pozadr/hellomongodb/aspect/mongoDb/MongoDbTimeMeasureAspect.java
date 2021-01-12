@@ -25,8 +25,7 @@ public class MongoDbTimeMeasureAspect {
     @After("@annotation(pl.pozadr.hellomongodb.aspect.mongoDb.MongoDbReadTimeMeasure)")
     public void stopMongoDbReadTime() {
         readWatch.stop();
-        double readTimeInSeconds = (double) readWatch.getTime() / 1000;
-        System.out.println("MongoDb read time: " + readTimeInSeconds + "s");
+        System.out.println("MongoDb read time: " + readWatch.getTime() + " ms");
     }
 
     @Before("@annotation(pl.pozadr.hellomongodb.aspect.mongoDb.MongoDbSaveTimeMeasure)")
@@ -37,7 +36,6 @@ public class MongoDbTimeMeasureAspect {
     @After("@annotation(pl.pozadr.hellomongodb.aspect.mongoDb.MongoDbSaveTimeMeasure)")
     public void stopMongoDbSaveTime() {
         saveWatch.stop();
-        double saveTimeInSeconds = (double) saveWatch.getTime() / 1000;
-        System.out.println("MongoDb save time: " + saveTimeInSeconds + "s");
+        System.out.println("MongoDb save time: " + saveWatch.getTime() + " ms");
     }
 }

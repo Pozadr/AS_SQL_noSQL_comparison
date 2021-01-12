@@ -15,6 +15,8 @@ public class SqlDbTimeMeasureAspect {
     public SqlDbTimeMeasureAspect() {
         this.readWatch = new StopWatch();
         this.saveWatch = new StopWatch();
+
+
     }
 
     @Before("@annotation(pl.pozadr.hellomongodb.aspect.sqlDb.SqlDbReadTimeMeasure)")
@@ -25,8 +27,7 @@ public class SqlDbTimeMeasureAspect {
     @After("@annotation(pl.pozadr.hellomongodb.aspect.sqlDb.SqlDbReadTimeMeasure)")
     public void stopSqlDbReadTime() {
         readWatch.stop();
-        double readTimeInSeconds = (double) readWatch.getTime() / 1000;
-        System.out.println("Sql read time: " + readTimeInSeconds + "s");
+        System.out.println("Sql read time: " + readWatch.getTime() + " ms");
     }
 
     @Before("@annotation(pl.pozadr.hellomongodb.aspect.sqlDb.SqlDbSaveTimeMeasure)")
@@ -37,7 +38,6 @@ public class SqlDbTimeMeasureAspect {
     @After("@annotation(pl.pozadr.hellomongodb.aspect.sqlDb.SqlDbSaveTimeMeasure)")
     public void stopSqlDbSaveTime() {
         saveWatch.stop();
-        double saveTimeInSeconds = (double) saveWatch.getTime() / 1000;
-        System.out.println("Sql save time: " + saveTimeInSeconds + "s");
+        System.out.println("Sql save time: " + saveWatch.getTime() + " ms");
     }
 }

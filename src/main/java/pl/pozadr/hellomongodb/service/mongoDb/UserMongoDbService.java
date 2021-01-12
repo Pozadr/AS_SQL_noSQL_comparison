@@ -5,7 +5,9 @@ import pl.pozadr.hellomongodb.model.UserMongoDb;
 import java.util.List;
 
 public interface UserMongoDbService {
-    void saveAllFromCsvToMongoDb();
+    void saveAllMongoDb(List<UserMongoDb> users);
+
     void deleteAllMongoDb();
+
     List<UserMongoDb> findAllMongoDb();
 }

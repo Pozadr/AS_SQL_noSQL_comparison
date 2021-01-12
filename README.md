@@ -13,8 +13,10 @@ application.properties file:
     spring.datasource.username=
     spring.datasource.password=
     spring.datasource.driver-class-name=
-    
     spring.jpa.hibernate.ddl-auto=create
+
+    spring.data.mongodb.uri=
+
     
 
 
