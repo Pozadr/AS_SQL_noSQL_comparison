@@ -1,4 +1,4 @@
-package pl.pozadr.hellomongodb.service;
+package pl.pozadr.hellomongodb.service.csv;
 
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -15,10 +15,13 @@ import java.util.List;
 
 @Service
 public class DataServiceImpl implements DataService {
+    private static final String DATA_PATH = "./data/MOCK_DATA.csv";
+
+
     @Override
     public List<UserMongoDb> readCsvUserMongoDb() {
         try {
-            Reader reader = Files.newBufferedReader(Paths.get("./data/MOCK_DATA.csv"));
+            Reader reader = Files.newBufferedReader(Paths.get(DATA_PATH));
             CsvToBean<UserMongoDb> csvToBean = new CsvToBeanBuilder<UserMongoDb>(reader)
                     .withType(UserMongoDb.class)
                     .withIgnoreLeadingWhiteSpace(true)
@@ -35,7 +38,7 @@ public class DataServiceImpl implements DataService {
     @Override
     public List<UserSqlDb> readCsvUserSqlDb() {
         try {
-            Reader reader = Files.newBufferedReader(Paths.get("./data/MOCK_DATA.csv"));
+            Reader reader = Files.newBufferedReader(Paths.get(DATA_PATH));
             CsvToBean<UserSqlDb> csvToBean = new CsvToBeanBuilder<UserSqlDb>(reader)
                     .withType(UserSqlDb.class)
                     .withIgnoreLeadingWhiteSpace(true)

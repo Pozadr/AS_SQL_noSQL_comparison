@@ -1,4 +1,4 @@
-package pl.pozadr.hellomongodb.service;
+package pl.pozadr.hellomongodb.service.csv;
 
 import pl.pozadr.hellomongodb.model.UserMongoDb;
 import pl.pozadr.hellomongodb.model.UserSqlDb;

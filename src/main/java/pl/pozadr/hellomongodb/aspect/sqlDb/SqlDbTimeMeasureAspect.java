@@ -15,8 +15,6 @@ public class SqlDbTimeMeasureAspect {
     public SqlDbTimeMeasureAspect() {
         this.readWatch = new StopWatch();
         this.saveWatch = new StopWatch();
-
-
     }
 
     @Before("@annotation(pl.pozadr.hellomongodb.aspect.sqlDb.SqlDbReadTimeMeasure)")

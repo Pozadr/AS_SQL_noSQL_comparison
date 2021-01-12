@@ -6,7 +6,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import pl.pozadr.hellomongodb.model.UserMongoDb;
 import pl.pozadr.hellomongodb.model.UserSqlDb;
-import pl.pozadr.hellomongodb.service.DataService;
+import pl.pozadr.hellomongodb.service.csv.DataService;
 import pl.pozadr.hellomongodb.service.mongoDb.UserMongoDbService;
 import pl.pozadr.hellomongodb.service.sqlDb.UserSqlDbService;
 

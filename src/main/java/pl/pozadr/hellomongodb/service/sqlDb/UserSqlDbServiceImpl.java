@@ -5,7 +5,6 @@ import pl.pozadr.hellomongodb.aspect.sqlDb.SqlDbReadTimeMeasure;
 import pl.pozadr.hellomongodb.aspect.sqlDb.SqlDbSaveTimeMeasure;
 import pl.pozadr.hellomongodb.model.UserSqlDb;
 import pl.pozadr.hellomongodb.repository.UserSqlDbRepo;
-import pl.pozadr.hellomongodb.service.DataService;
 
 import java.util.List;
 
@@ -14,9 +13,11 @@ public class UserSqlDbServiceImpl implements UserSqlDbService {
 
     private final UserSqlDbRepo sqlDbRepo;
 
+
     public UserSqlDbServiceImpl(UserSqlDbRepo sqlDbRepo) {
         this.sqlDbRepo = sqlDbRepo;
     }
+
 
     @Override
     @SqlDbReadTimeMeasure
