@@ -6,7 +6,7 @@ import com.opencsv.bean.CsvBindByName;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "usersDbComp")
+@Table(name = "users")
 public class UserSqlDb {
 
     @Id
